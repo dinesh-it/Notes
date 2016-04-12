@@ -73,6 +73,16 @@ this will update your branch and apply all the changes of current branch on top 
     - Alternatively you can use patch command `patch -p1 < path/file.patch` Ref:[Patch apply](https://www.drupal.org/patch/apply)
 * Ref: [Create and apply a patch with git](https://ariejan.net/2009/10/26/how-to-create-and-apply-a-patch-with-git/)
 
+### Revert all permission changes ###
+* `git diff -p -R` - See all the diff in reverse order
+* `grep -E "^(diff|(old|new) mode)" >revert_modes` - Take all the mode changes alone
+* `git apply <revert_modes` - Apply all those reversed permission (mode) changes
+* It can be done in a one liner - `git diff -p -R | grep -E "^(diff|(old|new) mode)" | git apply`
+
+### Creating a git alias ###
+* `git config --global --add alias.alias_name 'your_git_command'` - will add a git command alias
+* eg: `git config --global --add alias.update "git stash save && git pull --rebase upstream && git stash pop"` - now you can simply use `git update`.
+
 ### Good to read ###
 * [25 Tips for intermediate git users](https://www.andyjeffries.co.uk/25-tips-for-intermediate-git-users/)
 * [Git branch doc](http://git-scm.com/book/en/v1/Git-Branching-What-a-Branch-Is) or [Git branch tutorial](https://www.atlassian.com/git/tutorials/using-branches/git-branch)
